@@ -1,0 +1,41 @@
+class Solution {
+    public int neg(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int last = nums.length;
+        while(left <= right) {
+            int mid = (left + right) / 2;
+            if(nums[mid] < 0) {
+                left = mid + 1;
+            }
+            else if(nums[mid] == 0 || nums[mid] > 0) {
+                last = mid;
+                right = mid - 1;
+            }
+        }
+        return last;
+    }
+    public int pos(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int last = nums.length;
+        while(left <= right) {
+            int mid = (left + right) / 2;
+            if(nums[mid] > 0) {
+                last = mid;
+                right = mid - 1;
+            }
+            else if(nums[mid] == 0 || nums[mid] < 0) {
+                left = mid + 1;
+            }
+        }
+        return last;
+    }
+    public int maximumCount(int[] nums) {
+        int n = nums.length;
+        int negativeIndex = neg(nums);
+        int positiveIndex = n - pos(nums);
+
+        return Math.max(negativeIndex , positiveIndex);
+    }
+}
